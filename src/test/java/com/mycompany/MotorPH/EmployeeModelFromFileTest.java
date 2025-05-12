@@ -28,10 +28,10 @@ public class EmployeeModelFromFileTest {
 
         // Set the test file path to the temporary file
         String testFilePath = tempFile.getAbsolutePath();
-        EmployeeModelFromFile.setTXT_FILE_PATH(testFilePath);
+        EmployeeFileManager.setTXT_FILE_PATH(testFilePath);
 
         // Load employees
-        List<Employee> employees = EmployeeModelFromFile.loadEmployees();
+        List<Employee> employees = EmployeeFileManager.loadEmployees();
 
         // Assertions
         assertEquals(1, employees.size()); // Assuming one employee is loaded

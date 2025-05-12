@@ -4,20 +4,15 @@
  */
 package com.mycompany.MotorPH;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+// This SSS class extends Calculation and calculates the SSS deduction for an employee
+
 import java.util.List;
 
-// This SSS class extends Calculation and calculates the SSS deduction for an employee
 public class SSS extends Calculation {
     
     
     private String compensationRange;
     private double contribution;
-    // This is the File path for SSS contribution data
-    private static final String TXT_FILE_PATH = "src/main/resources/SSSCont1.txt";
     
     private static final List<SSS> sssDeductionRecords;
     
@@ -33,7 +28,8 @@ public class SSS extends Calculation {
     
     // INITIALIZE
     static {
-        sssDeductionRecords = loadSssDeductions();
+        SSSFileManager sssFile = new SSSFileManager();
+        sssDeductionRecords = sssFile.loadFile();
     }
     
     @Override
@@ -52,31 +48,7 @@ public class SSS extends Calculation {
         return sssDeduction;
     }
     
-    // LOADS THE SSS CONTRIBUTION FILE AND SAVES IT AS NEW OBJECT IN OBJECT ARRAY LIST
-    private static List<SSS> loadSssDeductions() {
-        List<SSS> deductionRecord = new ArrayList<>();
-        
-        // Tries to read the file and load data from it before closing.
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(TXT_FILE_PATH))) {
-            bufferedReader.readLine();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                // Assuming the format of your file is: compensationRange,contribution
-                String[] record = line.split(",");
-                String compensationRange = record[0];
-                double contribution = Double.parseDouble(record[1]);
-
-                SSS deductionRecordItem = new SSS(compensationRange, contribution);
-                deductionRecord.add(deductionRecordItem);
-            }
-        } catch (IOException e) {
-            handleException(e);
-        }
-        
-        return deductionRecord;
-    }
-
-    // PARSES SSS CONTRIBUTION RANGE .CSV FILE TO USE IN SSS CALCULATION
+        // PARSES SSS CONTRIBUTION RANGE .CSV FILE TO USE IN SSS CALCULATION
     private static double[] parseSssCompensationRange(String compensationRange) {
     // Remove any extra spaces
     compensationRange = compensationRange.trim();
@@ -97,11 +69,7 @@ public class SSS extends Calculation {
     } catch (NumberFormatException e) {
         throw new IllegalArgumentException("Invalid numeric format in compensation range: " + compensationRange, e);
     }
-}        
-    
-    private static void handleException(Exception e) {
-            e.printStackTrace();    
-        }
+} 
 
     /**
      * @return the compensationRange

@@ -9,19 +9,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-// This EmployeeModelFromFile class is responsible for loading Employee data from a text file
-    public class EmployeeModelFromFile{
+// This EmployeeFileManager class is responsible for loading Employee data from a text file
+    public class EmployeeFileManager implements FileLoader{
         // Path to the text file containing Employee data
         private static String TXT_FILE_PATH = "src/main/resources/Data.txt";
         private static final List<Employee> employees;
         
     //INITIALIZE
     static {
-            employees = loadEmployees();
+            EmployeeFileManager empFile = new EmployeeFileManager();
+            employees = empFile.loadFile();
     }
 
     //LOADS EMPLOYEE DATA
-    public static List<Employee> loadEmployees() {
+    @Override
+    public List<Employee> loadFile() {
         //INITIALIZES NEW OBJECT ARRAY LIST
         List<Employee> employees = new ArrayList<>();
         

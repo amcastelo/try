@@ -46,8 +46,8 @@ public class LatePenalty extends Calculation{
 
                 }
 
-                System.out.println("Late ID" + Grosswage.getTargetEmployeeID());
-                System.out.println("month" + Grosswage.getTargetMonth());
+                // System.out.println("Late ID" + Grosswage.getTargetEmployeeID());
+                // System.out.println("month" + Grosswage.getTargetMonth());
                 // You can add more logic here if needed, such as printing details for each record
             }
         }

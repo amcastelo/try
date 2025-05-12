@@ -66,8 +66,25 @@ public class MotorPHMain {
                 break;
         }
         
-        System.out.println("back to menu? 1 = yes, 0 = no");
-        Resume = scanner.nextInt();
+        String input;
+            while (true) {
+                System.out.println("Back to menu? 1 = yes, 0 = no");
+                input = scanner.next();
+
+                if (input.equals("1")) {
+                    Resume = 1;
+                    break;
+                } else if (input.equals("0")) {
+                    Resume = 0;
+                    break;
+                } else {
+                    System.out.print("""
+                    -----------------------------------                 
+                    Invalid input! Please enter 1 or 0.
+                    ----------------------------------- 
+                                     """);
+                }
+            }
         }while (Resume != 0);
     }
     
@@ -81,7 +98,7 @@ public class MotorPHMain {
     }
     
     private static void printEmpSelectList() {
-        List<Employee> employees = EmployeeModelFromFile.getEmployeeModelList();
+        List<Employee> employees = EmployeeFileManager.getEmployeeModelList();
         
         System.out.println("""
                    -------------------------
@@ -114,7 +131,7 @@ public class MotorPHMain {
     }
     
     private static void allEmployeeList() {
-    List<Employee> employees = EmployeeModelFromFile.getEmployeeModelList();
+    List<Employee> employees = EmployeeFileManager.getEmployeeModelList();
                     
         for (Employee employee : employees) {
         System.out.println(employee);

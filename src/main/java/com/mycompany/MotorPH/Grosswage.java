@@ -22,7 +22,7 @@ public class Grosswage extends Calculation{
     
     @Override
     public double calculate(){
-        List<Employee> employees = EmployeeModelFromFile.getEmployeeModelList();  // Get the list of employees
+        List<Employee> employees = EmployeeFileManager.getEmployeeModelList();  // Get the list of employees
             Scanner sc = new Scanner(System.in);
             
             // Asks for User Input.
